@@ -38,3 +38,35 @@ function speak(){
     
     synth.speak(utterIs);
 }
+function predictGesture(){
+    img=document.getElementById("take_snapshot");
+    classifier.classify(img,gotResult);
+
+}
+function gotResult(error,results){
+    if (error) {
+        console.error(error);
+    }
+    else{
+        console.log(results);
+        document.getElementById("gesture_name").innerHTML=results[0].label;
+        prediction1=results[0].label;
+        speak()
+        if(results[0].label=="namaste")
+        {
+            document.getElementById("gesture").innerHTML="&#128079;";
+        }
+        if(results[0].label=="victory")
+        {
+            document.getElementById("gesture").innerHTML="&#9996;";
+        }
+        if(results[0].label=="Amazing")
+        {
+            document.getElementById("gesture").innerHTML="&#128076;";
+        }
+        if(results[0].label=="best(thumbs up)")
+        {
+            document.getElementById("gesture").innerHTML="&#128077;";
+        }
+    }
+}
